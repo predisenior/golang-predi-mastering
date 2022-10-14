@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  title: Books API
+  description: API for Books
+  version: '1.0'
+
+servers:
+  - description: base URL for books API
+    url: http://localhost:3000
+paths:
+  /books:
+    get:
+      description: 'get all books list '
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+          examples:
+            golang:
+              description: introduction golang
+              value: golang
+      responses:
+        '200':
+          description: get all books succed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    author:
+                      type: string
+                    publisher:
+                      type: string
+    post:
+      description: create a new book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+                publisher:
+                  type: string
+            examples:
+              book:
+                description: create a new book
+                value:
+                  name: introduction golang
+                  author: noname
+                  publisher: alta
+      responses:
+        '201':
+          description: create a book succed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  publisher:
+                    type: string
+              examples:
+                book:
+                  description: A book saved
+                  value:
+                    id: 1
+                    name: introduction golang
+                    author: noname
+                    publishe: alta
+  /book/{id}:
+    get:
+      description: get book by id
+      parameters:
+        - description: book ID
+          in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          examples:
+            book:
+              description: Book's ID
+              value: 1
+      responses:
+        '200':
+          description: Book Founded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  publisher:
+                    type: string
+              examples:
+                book:
+                  description: create a new book
+                  value:
+                    name: introduction golang
+                    author: noname
+                    publisher: alta
+    put:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+                publisher:
+                  type: string
+            examples:
+              book:
+                description: update a book
+                value:
+                  name: introduction golang
+                  author: noname
+                  publisher: freedom
+      parameters:
+        - description: book ID
+          in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          examples:
+            book:
+              description: Book's ID
+              value: 1
+      responses:
+        '200':
+          description: update book succed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  author:
+                    type: string
+                  publisher:
+                    type: string
+              examples:
+                book:
+                  description: update a new book
+                  value:
+                    name: introduction golang basic
+                    author: noname
+                    publisher: alta
+    delete:
+      description: delete a book
+      parameters:
+        - description: book ID
+          in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          examples:
+            book:
+              description: Book's ID
+              value: 1
+      responses:
+        '200':
+          description: delete succed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                success:
+                  description: buku sukses dihapus
+                  value:
+                    message: book deleted
