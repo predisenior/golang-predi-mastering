@@ -6,7 +6,6 @@ Project-1
 2. Database mysql with table go_books, user
 3. Books CRUD API
 
-
 Project-2
 
 1.Implementation with authentication
